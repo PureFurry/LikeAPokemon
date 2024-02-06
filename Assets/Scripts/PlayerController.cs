@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public LayerMask solidObjectsLayer;
+    public LayerMask grassLayer;
 
     public bool isMoving;
     private Vector2 input;
@@ -53,6 +55,19 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = targetPos;
         isMoving = false;
+
+        CheckForEncounters();
+    }
+    //Grass Random Event Function is here
+    private void CheckForEncounters()
+    {
+        if (Physics2D.OverlapCircle(transform.position, 0.2f, grassLayer) != null)
+        {
+            if (UnityEngine.Random.Range(1, 101) <= 10)
+            {
+                Debug.Log("asdasd");
+            } 
+        }
     }
 
     private bool IsWalkable(Vector3 targetPos)
